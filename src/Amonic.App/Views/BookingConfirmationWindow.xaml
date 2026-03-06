@@ -1,0 +1,55 @@
+<Window x:Class="Amonic.App.Views.BookingConfirmationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Booking Confirmation"
+        WindowStartupLocation="CenterScreen"
+        Height="620" Width="980">
+    <DockPanel Margin="12">
+        <StackPanel DockPanel.Dock="Top">
+            <TextBlock FontSize="18" FontWeight="Bold" Text="Confirm Booking"/>
+            <TextBlock Margin="0,4,0,8" Text="Outbound/Return route details (including transfers)"/>
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Width="160" Margin="0,0,8,0" Content="Confirm booking" Click="Confirm_Click"/>
+            <Button Width="160" Background="IndianRed" Foreground="White" Content="Cancel" Click="Cancel_Click"/>
+        </StackPanel>
+
+        <Grid>
+            <Grid.RowDefinitions><RowDefinition Height="220"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+            <DataGrid Grid.Row="0" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Segment" Width="*" Binding="{Binding Segment}"/>
+                    <DataGridTextColumn Header="From" Width="80" Binding="{Binding From}"/>
+                    <DataGridTextColumn Header="To" Width="80" Binding="{Binding To}"/>
+                    <DataGridTextColumn Header="Date" Width="100" Binding="{Binding Date}"/>
+                    <DataGridTextColumn Header="Time" Width="90" Binding="{Binding Time}"/>
+                    <DataGridTextColumn Header="Flight #" Width="120" Binding="{Binding Flight}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Grid.Row="1" Margin="0,10,0,0">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="280"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="Passenger data" FontWeight="Bold"/>
+                    <TextBox Margin="0,5" ToolTip="First name"/>
+                    <TextBox Margin="0,5" ToolTip="Last name"/>
+                    <DatePicker Margin="0,5"/>
+                    <TextBox Margin="0,5" ToolTip="Passport number"/>
+                    <ComboBox Margin="0,5"/>
+                    <TextBox Margin="0,5" ToolTip="Phone"/>
+                    <Button Width="150" Margin="0,8,0,0" Content="Add passenger"/>
+                </StackPanel>
+                <DataGrid Grid.Column="1" Margin="10,0,0,0" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="First" Binding="{Binding FirstName}" Width="*"/>
+                        <DataGridTextColumn Header="Last" Binding="{Binding LastName}" Width="*"/>
+                        <DataGridTextColumn Header="Passport" Binding="{Binding Passport}" Width="120"/>
+                        <DataGridTextColumn Header="Country" Binding="{Binding Country}" Width="120"/>
+                        <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="120"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>
