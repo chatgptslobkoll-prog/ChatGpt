@@ -39,12 +39,15 @@ namespace Amonic.App.Views
             var result = _authService.Login(email, password);
             if (!result.Success)
             {
-                _failedAttempts++;
                 MessageTextBlock.Text = result.ErrorMessage;
 
-                if (_failedAttempts >= 3)
+                if (!result.IsInfrastructureError)
                 {
-                    StartLockCountdown(10);
+                    _failedAttempts++;
+                    if (_failedAttempts >= 3)
+                    {
+                        StartLockCountdown(10);
+                    }
                 }
 
                 return;

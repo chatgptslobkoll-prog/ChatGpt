@@ -35,7 +35,7 @@
 
 ```xml
 <add name="SessionDb"
-     connectionString="Server=localhost\SQLEXPRESS;Database=Session3_01;Trusted_Connection=True;TrustServerCertificate=True;"
+     connectionString="Server=KAB17-11\SQLEXPRESS;Database=Session3_01;Trusted_Connection=True;TrustServerCertificate=True;Connect Timeout=5;"
      providerName="System.Data.SqlClient" />
 ```
 
@@ -48,3 +48,6 @@
 Добавлены POCO-модели таблиц `Session3_01` в `src/Amonic.App/Models/`:
 `Aircraft`, `Airport`, `CabinType`, `Country`, `Office`, `Role`, `Route`, `Schedule`, `Ticket`, `User`, `UserActivityLog`.
 
+
+
+Примечание: ошибки подключения к SQL Server в авторизации обрабатываются отдельно и не учитываются как неверные попытки ввода пароля.
