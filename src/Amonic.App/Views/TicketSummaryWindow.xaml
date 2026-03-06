@@ -1,0 +1,21 @@
+<Window x:Class="Amonic.App.Views.TicketSummaryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Tickets Issued"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Height="340" Width="700">
+    <DockPanel Margin="12">
+        <TextBlock DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" Text="Booking completed"/>
+        <TextBlock DockPanel.Dock="Top" Margin="0,6,0,10" Text="Booking reference: [ABC123]"/>
+        <DataGrid AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Passenger" Binding="{Binding Passenger}" Width="2*"/>
+                <DataGridTextColumn Header="Flight #" Binding="{Binding Flight}" Width="*"/>
+                <DataGridTextColumn Header="Cabin" Binding="{Binding Cabin}" Width="100"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button DockPanel.Dock="Bottom" Width="120" Height="30" HorizontalAlignment="Right" Margin="0,10,0,0" Content="Close" Click="Close_Click"/>
+    </DockPanel>
+</Window>

@@ -1,0 +1,20 @@
+<Window x:Class="Amonic.App.Views.ImportSchedulesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Import Schedule Changes"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Height="220" Width="520">
+    <Grid Margin="14">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+        <TextBlock Text="Select CSV file with ADD/EDIT changes" FontSize="16" FontWeight="Bold" Margin="0,0,0,12"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBox Width="340" Margin="0,0,8,0" IsReadOnly="True" Text="Schedules_V12.csv"/>
+            <Button Width="120" Content="Browse..." Click="Browse_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button Width="120" Margin="0,0,8,0" Content="Import" Click="Import_Click"/>
+            <Button Width="120" Background="IndianRed" Foreground="White" Content="Cancel" Click="Cancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
