@@ -1,7 +1,5 @@
 using System;
 using System.Data.SqlClient;
-using System.Security.Cryptography;
-using System.Text;
 using Amonic.App.Data;
 
 namespace Amonic.App.Services
@@ -28,9 +26,9 @@ namespace Amonic.App.Services
                     command.CommandText = @"
 SELECT TOP 1 ID, RoleID, Active
 FROM Users
-WHERE Email = @Email AND Password = @PasswordHash";
+WHERE Email = @Email AND Password = @Password";
                     command.Parameters.AddWithValue("@Email", email);
-                    command.Parameters.AddWithValue("@PasswordHash", Md5(password));
+                    command.Parameters.AddWithValue("@Password", password);
 
                     using (var reader = command.ExecuteReader())
                     {
@@ -72,22 +70,6 @@ WHERE Email = @Email AND Password = @PasswordHash";
                     IsInfrastructureError = true,
                     ErrorMessage = "Ошибка инициализации БД. Проверьте connection string в App.config."
                 };
-            }
-        }
-
-        public static string Md5(string plainText)
-        {
-            using (var md5 = MD5.Create())
-            {
-                var bytes = Encoding.UTF8.GetBytes(plainText ?? string.Empty);
-                var hash = md5.ComputeHash(bytes);
-                var builder = new StringBuilder();
-                foreach (var b in hash)
-                {
-                    builder.Append(b.ToString("x2"));
-                }
-
-                return builder.ToString();
             }
         }
     }
