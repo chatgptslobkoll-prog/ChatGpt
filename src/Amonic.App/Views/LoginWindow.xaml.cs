@@ -51,9 +51,15 @@ namespace Amonic.App.Views
             }
 
             _failedAttempts = 0;
-            MessageBox.Show(result.RoleId == 1
-                ? "Успешный вход как администратор."
-                : "Успешный вход как пользователь.");
+
+            Window targetWindow = result.RoleId == 1
+                ? (Window)new AdminMainWindow()
+                : new UserMainWindow();
+
+            targetWindow.Owner = this;
+            Hide();
+            targetWindow.ShowDialog();
+            Show();
         }
 
         private void StartLockCountdown(int seconds)

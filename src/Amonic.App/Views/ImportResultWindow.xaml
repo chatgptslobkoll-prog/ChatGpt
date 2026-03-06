@@ -1,0 +1,15 @@
+<Window x:Class="Amonic.App.Views.ImportResultWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Import Results"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Height="250" Width="430">
+    <Grid Margin="14">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+        <TextBlock Text="Import completed" FontSize="18" FontWeight="Bold" Margin="0,0,0,12"/>
+        <TextBlock Grid.Row="1" Text="Added: [0]" Margin="0,4"/>
+        <TextBlock Grid.Row="2" Text="Updated: [0], Duplicates: [0], Invalid: [0]" Margin="0,4"/>
+        <Button Grid.Row="3" Width="120" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="OK" Click="Ok_Click"/>
+    </Grid>
+</Window>

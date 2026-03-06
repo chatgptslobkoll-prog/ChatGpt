@@ -54,10 +54,101 @@
     </Compile>
     <Compile Include="Data\Db.cs" />
     <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Views\AddUserWindow.xaml.cs">
+      <DependentUpon>AddUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminMainWindow.xaml.cs">
+      <DependentUpon>AdminMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BookingConfirmationWindow.xaml.cs">
+      <DependentUpon>BookingConfirmationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangeRoleWindow.xaml.cs">
+      <DependentUpon>ChangeRoleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditScheduleWindow.xaml.cs">
+      <DependentUpon>EditScheduleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FlightSearchWindow.xaml.cs">
+      <DependentUpon>FlightSearchWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImportResultWindow.xaml.cs">
+      <DependentUpon>ImportResultWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImportSchedulesWindow.xaml.cs">
+      <DependentUpon>ImportSchedulesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ManageSchedulesWindow.xaml.cs">
+      <DependentUpon>ManageSchedulesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PaymentWindow.xaml.cs">
+      <DependentUpon>PaymentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TestingChecklistWindow.xaml.cs">
+      <DependentUpon>TestingChecklistWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TicketSummaryWindow.xaml.cs">
+      <DependentUpon>TicketSummaryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserMainWindow.xaml.cs">
+      <DependentUpon>UserMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\AddUserWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AdminMainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BookingConfirmationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ChangeRoleWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EditScheduleWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FlightSearchWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ImportResultWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ImportSchedulesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\LoginWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ManageSchedulesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PaymentWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TestingChecklistWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TicketSummaryWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

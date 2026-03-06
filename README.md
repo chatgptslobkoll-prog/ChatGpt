@@ -1,23 +1,33 @@
 # AMONIC Airlines (WPF .NET Framework 4.8)
 
-Стартовый каркас приложения под ваше задание (3 сессии) с подключением к MSSQL через ADO.NET.
+Проект переведен в формат «почти финального каркаса» по вашему ТЗ: добавлен полный набор окон (14 штук) для всех 3 сессий.
 
-## Что уже добавлено
+## Реализовано сейчас
 
-- Базовый WPF-проект (`.NET Framework 4.8`) с формой входа.
-- Подключение к SQL Server через `System.Data.SqlClient`.
-- Сервис авторизации с проверкой `Email + MD5(Password)`.
-- Ограничение входа после 3 неудачных попыток с таймером 10 секунд.
-- SQL-скрипт для логирования входов/выходов и фиксации «крашей» пользователя.
+- WPF-проект (`.NET Framework 4.8`) + решение Visual Studio.
+- Подключение к MS SQL через ADO.NET (`System.Data.SqlClient`).
+- Авторизация (`Email + MD5(password)`), проверка `Active`, блокировка на 10 секунд после 3 ошибок.
+- Дополнительная таблица `UserActivityLogs` (в отдельном SQL-скрипте) для фиксации входов/выходов/сбоев.
+- Созданы окна по этапам задания:
+  1. `LoginWindow`
+  2. `AdminMainWindow`
+  3. `AddUserWindow`
+  4. `ChangeRoleWindow`
+  5. `UserMainWindow`
+  6. `ManageSchedulesWindow`
+  7. `EditScheduleWindow`
+  8. `ImportSchedulesWindow`
+  9. `ImportResultWindow`
+  10. `FlightSearchWindow`
+  11. `BookingConfirmationWindow`
+  12. `PaymentWindow`
+  13. `TicketSummaryWindow`
+  14. `TestingChecklistWindow`
 
 ## Структура
 
-- `src/Amonic.App/` — приложение WPF.
-- `sql/Session3_01_UserActivity.sql` — дополнительная таблица логов активности.
-
-## Важно по БД
-
-В задании указано, что **основную структуру менять нельзя**. Поэтому трекинг реализуется добавлением новой таблицы, без изменения уже существующих таблиц.
+- `src/Amonic.App/` — WPF приложение.
+- `sql/Session3_01_UserActivity.sql` — скрипт дополнительной таблицы активности.
 
 ## Connection string
 
@@ -29,17 +39,6 @@
      providerName="System.Data.SqlClient" />
 ```
 
-## Что делать дальше (по сессиям)
+## Следующий шаг
 
-1. **Session 1**
-   - Импорт `UserData.csv` в `Users` (с MD5).
-   - Полное логирование авторизации/выхода.
-   - Формы: Admin/User main menu, Add User, Change Role.
-2. **Session 2**
-   - Импорт изменений расписаний из CSV (`ADD/EDIT`).
-   - Поиск/фильтрация/сортировка расписаний.
-   - Подтверждение/отмена рейса и редактирование.
-3. **Session 3**
-   - Поиск рейсов (включая маршруты с пересадкой).
-   - Бронирование пассажиров.
-   - Оплата и выпуск билетов с уникальным `BookingReference` (6 символов).
+Дальше можно последовательно подключить бизнес-логику/SQL к каждому из окон (CRUD пользователей, импорт расписаний, поиск с пересадками, выпуск билетов и уникальный Booking Reference).
