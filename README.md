@@ -1,33 +1,42 @@
 # AMONIC Airlines (WPF .NET Framework 4.8)
 
-Проект переведен в формат «почти финального каркаса» по вашему ТЗ: добавлен полный набор окон (14 штук) для всех 3 сессий.
+Проект реализует рабочий каркас по 3 сессиям AMONIC Airlines на WPF (.NET Framework 4.8) с SQL Server.
 
-## Реализовано сейчас
+## Что уже работает
 
-- WPF-проект (`.NET Framework 4.8`) + решение Visual Studio.
-- Подключение к MS SQL через ADO.NET (`System.Data.SqlClient`).
-- Авторизация (`Email + MD5(password)`), проверка `Active`, блокировка на 10 секунд после 3 ошибок.
-- Дополнительная таблица `UserActivityLogs` (в отдельном SQL-скрипте) для фиксации входов/выходов/сбоев.
-- Созданы окна по этапам задания:
-  1. `LoginWindow`
-  2. `AdminMainWindow`
-  3. `AddUserWindow`
-  4. `ChangeRoleWindow`
-  5. `UserMainWindow`
-  6. `ManageSchedulesWindow`
-  7. `EditScheduleWindow`
-  8. `ImportSchedulesWindow`
-  9. `ImportResultWindow`
-  10. `FlightSearchWindow`
-  11. `BookingConfirmationWindow`
-  12. `PaymentWindow`
-  13. `TicketSummaryWindow`
-  14. `TestingChecklistWindow`
+- Авторизация через таблицу `Users` (plain text пароль, как в текущей БД).
+- Разделение по ролям после входа (Admin/User).
+- Логирование входа/выхода в `UserActivityLogs`.
+- Админ-экран:
+  - загрузка списка пользователей из БД,
+  - фильтр по офисам,
+  - блокировка/разблокировка,
+  - смена роли,
+  - добавление пользователя.
+- Пользовательский экран:
+  - приветствие,
+  - суммарное время за 30 дней,
+  - количество сбоев,
+  - журнал активностей.
+- Управление расписаниями:
+  - фильтры/сортировка,
+  - изменение цены/даты/времени,
+  - подтверждение/отмена,
+  - импорт CSV (`ADD`/`EDIT`) с подсчётом результатов.
+- Поиск рейсов и бронирование:
+  - поиск one-way/round-trip,
+  - выбор класса обслуживания,
+  - проверка доступных мест,
+  - ввод пассажиров,
+  - выпуск билетов и генерация уникального `BookingReference`.
 
 ## Структура
 
-- `src/Amonic.App/` — WPF приложение.
-- `sql/Session3_01_UserActivity.sql` — скрипт дополнительной таблицы активности.
+- `src/Amonic.App/Views/` — окна WPF (14 окон).
+- `src/Amonic.App/Services/AppRepository.cs` — SQL-операции для всех экранов.
+- `src/Amonic.App/Models/` — модели таблиц БД.
+- `src/Amonic.App/ViewModels/AppViewModels.cs` — DTO для UI.
+- `sql/Session3_01_UserActivity.sql` — скрипт таблицы активности.
 
 ## Connection string
 
@@ -38,18 +47,3 @@
      connectionString="Server=KAB17-11\SQLEXPRESS;Database=Session3_01;Trusted_Connection=True;TrustServerCertificate=True;Connect Timeout=5;"
      providerName="System.Data.SqlClient" />
 ```
-
-## Следующий шаг
-
-Дальше можно последовательно подключить бизнес-логику/SQL к каждому из окон (CRUD пользователей, импорт расписаний, поиск с пересадками, выпуск билетов и уникальный Booking Reference).
-
-## Модели БД (без ADO.NET)
-
-Добавлены POCO-модели таблиц `Session3_01` в `src/Amonic.App/Models/`:
-`Aircraft`, `Airport`, `CabinType`, `Country`, `Office`, `Role`, `Route`, `Schedule`, `Ticket`, `User`, `UserActivityLog`.
-
-
-
-Примечание: ошибки подключения к SQL Server в авторизации обрабатываются отдельно и не учитываются как неверные попытки ввода пароля.
-
-Пароль в авторизации сейчас сравнивается в виде plain text (без MD5), так как в вашей БД пароли не хэшированы.

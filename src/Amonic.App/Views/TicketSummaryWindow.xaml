@@ -4,11 +4,11 @@
         Title="Tickets Issued"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Height="340" Width="700">
+        Height="360" Width="760">
     <DockPanel Margin="12">
         <TextBlock DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" Text="Booking completed"/>
-        <TextBlock DockPanel.Dock="Top" Margin="0,6,0,10" Text="Booking reference: [ABC123]"/>
-        <DataGrid AutoGenerateColumns="False">
+        <TextBlock x:Name="BookingReferenceTextBlock" DockPanel.Dock="Top" Margin="0,6,0,10"/>
+        <DataGrid x:Name="TicketsDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Passenger" Binding="{Binding Passenger}" Width="2*"/>
                 <DataGridTextColumn Header="Flight #" Binding="{Binding Flight}" Width="*"/>

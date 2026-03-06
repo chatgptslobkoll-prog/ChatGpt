@@ -3,14 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Admin Main Menu"
         WindowStartupLocation="CenterScreen"
-        Height="520" Width="900">
+        Height="560" Width="980">
     <DockPanel Margin="12">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Add user" Click="AddUser_Click" />
+            <MenuItem Header="Manage schedules" Click="ManageSchedules_Click" />
+            <MenuItem Header="Book tickets" Click="BookTickets_Click" />
             <MenuItem Header="Exit" Click="Exit_Click" />
         </Menu>
 
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+            <Button Width="130" Margin="0,0,8,0" Content="Refresh" Click="Refresh_Click"/>
             <Button Width="130" Margin="0,0,8,0" Content="Change Role" Click="ChangeRole_Click"/>
             <Button Width="130" Margin="0,0,8,0" Content="Block/Unblock" Click="ToggleBlock_Click"/>
             <Button Width="130" Background="IndianRed" Foreground="White" Content="Close" Click="Exit_Click"/>
@@ -20,21 +23,18 @@
             <TextBlock FontSize="18" FontWeight="Bold" Text="Users Management" Margin="0,0,0,10"/>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                 <TextBlock VerticalAlignment="Center" Text="Office:" Margin="0,0,8,0"/>
-                <ComboBox Width="220">
-                    <ComboBoxItem Content="All Offices" IsSelected="True"/>
-                    <ComboBoxItem Content="Abu Dhabi"/>
-                    <ComboBoxItem Content="Doha"/>
-                    <ComboBoxItem Content="Cairo"/>
-                </ComboBox>
+                <ComboBox x:Name="OfficeComboBox" Width="220" DisplayMemberPath="Title" SelectedValuePath="ID" SelectionChanged="OfficeComboBox_SelectionChanged"/>
             </StackPanel>
-            <DataGrid AutoGenerateColumns="False" Height="360">
+            <DataGrid x:Name="UsersDataGrid" AutoGenerateColumns="False" Height="390" IsReadOnly="True">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Width="50" Binding="{Binding ID}"/>
                     <DataGridTextColumn Header="First Name" Width="*" Binding="{Binding FirstName}"/>
                     <DataGridTextColumn Header="Last Name" Width="*" Binding="{Binding LastName}"/>
                     <DataGridTextColumn Header="Age" Width="80" Binding="{Binding Age}"/>
                     <DataGridTextColumn Header="Role" Width="140" Binding="{Binding Role}"/>
                     <DataGridTextColumn Header="Email" Width="2*" Binding="{Binding Email}"/>
                     <DataGridTextColumn Header="Office" Width="140" Binding="{Binding Office}"/>
+                    <DataGridCheckBoxColumn Header="Active" Width="70" Binding="{Binding Active}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

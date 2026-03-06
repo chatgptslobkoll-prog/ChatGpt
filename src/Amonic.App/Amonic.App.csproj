@@ -55,6 +55,8 @@
     </Compile>
     <Compile Include="Data\Db.cs" />
     <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\AppRepository.cs" />
+    <Compile Include="Services\SessionContext.cs" />
     <Compile Include="Views\AddUserWindow.xaml.cs">
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
     </Compile>
@@ -164,6 +166,7 @@
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserActivityLog.cs" />
+    <Compile Include="ViewModels\AppViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

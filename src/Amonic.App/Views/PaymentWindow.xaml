@@ -4,12 +4,12 @@
         Title="Payment Confirmation"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Height="320" Width="460">
+        Height="340" Width="460">
     <Grid Margin="14">
-        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
 
         <TextBlock FontSize="18" FontWeight="Bold" Text="Payment" Margin="0,0,0,12"/>
-        <TextBlock Grid.Row="1" Text="Total amount: [sum]" Margin="0,4"/>
+        <TextBlock x:Name="TotalAmountTextBlock" Grid.Row="1" Margin="0,4"/>
 
         <GroupBox Grid.Row="2" Header="Payment method" Margin="0,8,0,0">
             <StackPanel Margin="8">
@@ -19,7 +19,9 @@
             </StackPanel>
         </GroupBox>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,12,0,0">
+        <TextBlock x:Name="ErrorTextBlock" Grid.Row="3" Foreground="Firebrick" Margin="0,8,0,0"/>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,12,0,0">
             <Button Width="130" Margin="0,0,8,0" Content="Issue ticket" Click="Issue_Click"/>
             <Button Width="130" Background="IndianRed" Foreground="White" Content="Cancel" Click="Cancel_Click"/>
         </StackPanel>

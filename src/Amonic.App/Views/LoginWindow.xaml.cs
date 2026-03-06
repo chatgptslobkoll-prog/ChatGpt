@@ -8,6 +8,7 @@ namespace Amonic.App.Views
     public partial class LoginWindow : Window
     {
         private readonly AuthService _authService = new AuthService();
+        private readonly AppRepository _repository = new AppRepository();
         private readonly DispatcherTimer _lockTimer;
         private int _failedAttempts;
         private int _lockSecondsLeft;
@@ -55,9 +56,18 @@ namespace Amonic.App.Views
 
             _failedAttempts = 0;
 
+            SessionContext.CurrentUserId = result.UserId;
+            SessionContext.CurrentRoleId = result.RoleId;
+
+            var logId = _repository.CreateActivityLog(result.UserId);
             Window targetWindow = result.RoleId == 1
                 ? (Window)new AdminMainWindow()
-                : new UserMainWindow();
+                : new UserMainWindow(result.UserId, logId);
+
+            if (result.RoleId == 1)
+            {
+                targetWindow.Closed += (_, __) => _repository.CloseActivityLog(logId);
+            }
 
             targetWindow.Owner = this;
             Hide();

@@ -4,20 +4,21 @@
         Title="Edit Schedule"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Height="280" Width="430">
+        Height="300" Width="430">
     <Grid Margin="14">
         <Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
 
         <TextBlock Grid.ColumnSpan="2" Text="Edit selected flight" FontSize="16" FontWeight="Bold" Margin="0,0,0,12"/>
         <TextBlock Grid.Row="1" Text="Date:" VerticalAlignment="Center"/>
-        <DatePicker Grid.Row="1" Grid.Column="1" Margin="0,4"/>
-        <TextBlock Grid.Row="2" Text="Time:" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="0,4"/>
+        <DatePicker x:Name="DatePicker" Grid.Row="1" Grid.Column="1" Margin="0,4"/>
+        <TextBlock Grid.Row="2" Text="Time (HH:mm):" VerticalAlignment="Center"/>
+        <TextBox x:Name="TimeTextBox" Grid.Row="2" Grid.Column="1" Margin="0,4"/>
         <TextBlock Grid.Row="3" Text="Economy Price:" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Margin="0,4"/>
+        <TextBox x:Name="PriceTextBox" Grid.Row="3" Grid.Column="1" Margin="0,4"/>
+        <TextBlock x:Name="ErrorTextBlock" Grid.Row="4" Grid.ColumnSpan="2" Foreground="Firebrick"/>
 
-        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
             <Button Width="110" Margin="0,0,8,0" Content="Save" Click="Save_Click"/>
             <Button Width="110" Background="IndianRed" Foreground="White" Content="Cancel" Click="Cancel_Click"/>
         </StackPanel>

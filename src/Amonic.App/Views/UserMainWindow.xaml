@@ -3,18 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="User Main Menu"
         WindowStartupLocation="CenterScreen"
-        Height="500" Width="880">
+        Height="520" Width="920">
     <DockPanel Margin="12">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Exit" Click="Exit_Click"/>
         </Menu>
 
         <StackPanel>
-            <TextBlock FontSize="18" FontWeight="Bold" Text="Hi [fullname], Welcome to AMONIC Airlines Automation System" />
-            <TextBlock Margin="0,8,0,0" Text="Time spent on system: [hh:mm:ss]" />
-            <TextBlock Margin="0,0,0,10" Text="Number of crashes: [n]" />
+            <TextBlock x:Name="WelcomeTextBlock" FontSize="18" FontWeight="Bold"/>
+            <TextBlock x:Name="TimeTextBlock" Margin="0,8,0,0" />
+            <TextBlock x:Name="CrashTextBlock" Margin="0,0,0,10" />
 
-            <DataGrid Height="360" AutoGenerateColumns="False">
+            <DataGrid x:Name="ActivityDataGrid" Height="380" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Login" Width="*" Binding="{Binding LoginAt}"/>
                     <DataGridTextColumn Header="Logout" Width="*" Binding="{Binding LogoutAt}"/>

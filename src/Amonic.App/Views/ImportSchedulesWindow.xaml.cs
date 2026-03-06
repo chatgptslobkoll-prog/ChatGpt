@@ -1,9 +1,13 @@
 using System.Windows;
+using Microsoft.Win32;
+using Amonic.App.Services;
 
 namespace Amonic.App.Views
 {
     public partial class ImportSchedulesWindow : Window
     {
+        private readonly AppRepository _repository = new AppRepository();
+
         public ImportSchedulesWindow()
         {
             InitializeComponent();
@@ -11,12 +15,24 @@ namespace Amonic.App.Views
 
         private void Browse_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Здесь будет выбор CSV-файла.");
+            var dialog = new OpenFileDialog { Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*" };
+            if (dialog.ShowDialog() == true)
+            {
+                PathTextBox.Text = dialog.FileName;
+            }
         }
 
         private void Import_Click(object sender, RoutedEventArgs e)
         {
-            new ImportResultWindow { Owner = this }.ShowDialog();
+            if (string.IsNullOrWhiteSpace(PathTextBox.Text))
+            {
+                ErrorTextBlock.Text = "Выберите файл.";
+                return;
+            }
+
+            var result = _repository.ImportSchedules(PathTextBox.Text);
+            new ImportResultWindow(result) { Owner = this }.ShowDialog();
+            DialogResult = true;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

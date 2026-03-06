@@ -3,23 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Flight Search"
         WindowStartupLocation="CenterScreen"
-        Height="620" Width="1100">
+        Height="640" Width="1120">
     <DockPanel Margin="12">
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
-            <TextBlock VerticalAlignment="Center" Text="From:" Margin="0,0,6,0"/><ComboBox Width="110" Margin="0,0,10,0"/>
-            <TextBlock VerticalAlignment="Center" Text="To:" Margin="0,0,6,0"/><ComboBox Width="110" Margin="0,0,10,0"/>
-            <TextBlock VerticalAlignment="Center" Text="Outbound:" Margin="0,0,6,0"/><DatePicker Width="130" Margin="0,0,10,0"/>
-            <TextBlock VerticalAlignment="Center" Text="Return:" Margin="0,0,6,0"/><DatePicker Width="130" Margin="0,0,10,0"/>
-            <ComboBox Width="130" Margin="0,0,10,0"><ComboBoxItem Content="Economy" IsSelected="True"/><ComboBoxItem Content="Business"/><ComboBoxItem Content="First"/></ComboBox>
-            <RadioButton Content="One way" Margin="0,0,8,0" IsChecked="True"/>
-            <RadioButton Content="Round trip" Margin="0,0,10,0"/>
-            <Button Width="90" Content="Search"/>
+            <TextBlock VerticalAlignment="Center" Text="From:" Margin="0,0,6,0"/><ComboBox x:Name="FromComboBox" Width="110" Margin="0,0,10,0" DisplayMemberPath="IATACode" SelectedValuePath="ID"/>
+            <TextBlock VerticalAlignment="Center" Text="To:" Margin="0,0,6,0"/><ComboBox x:Name="ToComboBox" Width="110" Margin="0,0,10,0" DisplayMemberPath="IATACode" SelectedValuePath="ID"/>
+            <TextBlock VerticalAlignment="Center" Text="Outbound:" Margin="0,0,6,0"/><DatePicker x:Name="OutboundDatePicker" Width="130" Margin="0,0,10,0"/>
+            <TextBlock VerticalAlignment="Center" Text="Return:" Margin="0,0,6,0"/><DatePicker x:Name="ReturnDatePicker" Width="130" Margin="0,0,10,0"/>
+            <ComboBox x:Name="CabinComboBox" Width="130" Margin="0,0,10,0"><ComboBoxItem Content="Economy" Tag="1" IsSelected="True"/><ComboBoxItem Content="Business" Tag="2"/><ComboBoxItem Content="First" Tag="3"/></ComboBox>
+            <RadioButton x:Name="OneWayRadioButton" Content="One way" Margin="0,0,8,0" IsChecked="True"/>
+            <RadioButton x:Name="RoundTripRadioButton" Content="Round trip" Margin="0,0,10,0"/>
+            <Button Width="90" Content="Search" Click="Search_Click"/>
         </StackPanel>
 
         <StackPanel>
             <TextBlock FontWeight="Bold" Text="Outbound flights"/>
-            <CheckBox Margin="0,4,0,4" Content="±3 days"/>
-            <DataGrid Height="200" AutoGenerateColumns="False">
+            <CheckBox x:Name="OutboundAroundDaysCheckBox" Margin="0,4,0,4" Content="±3 days"/>
+            <DataGrid x:Name="OutboundDataGrid" Height="210" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="From" Binding="{Binding From}" Width="80"/>
                     <DataGridTextColumn Header="To" Binding="{Binding To}" Width="80"/>
@@ -27,16 +27,27 @@
                     <DataGridTextColumn Header="Time" Binding="{Binding Time}" Width="90"/>
                     <DataGridTextColumn Header="Flights" Binding="{Binding Flights}" Width="2*"/>
                     <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
+                    <DataGridTextColumn Header="Free" Binding="{Binding FreeSeats}" Width="70"/>
                 </DataGrid.Columns>
             </DataGrid>
 
             <TextBlock FontWeight="Bold" Margin="0,10,0,0" Text="Return flights"/>
-            <CheckBox Margin="0,4,0,4" Content="±3 days"/>
-            <DataGrid Height="200" AutoGenerateColumns="False"/>
+            <CheckBox x:Name="ReturnAroundDaysCheckBox" Margin="0,4,0,4" Content="±3 days"/>
+            <DataGrid x:Name="ReturnDataGrid" Height="210" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="From" Binding="{Binding From}" Width="80"/>
+                    <DataGridTextColumn Header="To" Binding="{Binding To}" Width="80"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="100"/>
+                    <DataGridTextColumn Header="Time" Binding="{Binding Time}" Width="90"/>
+                    <DataGridTextColumn Header="Flights" Binding="{Binding Flights}" Width="2*"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
+                    <DataGridTextColumn Header="Free" Binding="{Binding FreeSeats}" Width="70"/>
+                </DataGrid.Columns>
+            </DataGrid>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
                 <TextBlock VerticalAlignment="Center" Text="Passengers:" Margin="0,0,6,0"/>
-                <TextBox Width="60" Text="1" Margin="0,0,10,0"/>
+                <TextBox x:Name="PassengersTextBox" Width="60" Text="1" Margin="0,0,10,0"/>
                 <Button Width="180" Content="Book selected flights" Click="Book_Click"/>
             </StackPanel>
         </StackPanel>
