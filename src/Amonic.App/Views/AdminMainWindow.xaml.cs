@@ -18,7 +18,7 @@ namespace Amonic.App.Views
 
         private void LoadOffices()
         {
-            var offices = new List<OfficeItem> { new OfficeItem { ID = 0, Title = "All Offices" } };
+            var offices = new List<OfficeItem> { new OfficeItem { ID = 0, Title = "Все офисы" } };
             offices.AddRange(_repository.GetOffices());
             OfficeComboBox.ItemsSource = offices;
             OfficeComboBox.SelectedIndex = 0;

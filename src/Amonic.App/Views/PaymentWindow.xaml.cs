@@ -20,10 +20,10 @@ namespace Amonic.App.Views
             _scheduleIds = scheduleIds;
             _cabinTypeId = cabinTypeId;
             _passengers = passengers;
-            var firstPrice = scheduleIds.Count > 0 ? _repository.SearchSchedules(null, null, null, string.Empty, "Date and Time").FirstOrDefault(s => s.ID == scheduleIds[0])?.Economy ?? 0 : 0;
+            var firstPrice = scheduleIds.Count > 0 ? _repository.SearchSchedules(null, null, null, string.Empty, "Дата и время").FirstOrDefault(s => s.ID == scheduleIds[0])?.Economy ?? 0 : 0;
             var multiplier = _cabinTypeId == 1 ? 1m : _cabinTypeId == 2 ? 1.35m : 1.35m * 1.30m;
             var total = Math.Floor(firstPrice * multiplier) * scheduleIds.Count * passengers.Count;
-            TotalAmountTextBlock.Text = $"Total amount: {total}";
+            TotalAmountTextBlock.Text = $"Сумма к оплате: {total}";
         }
 
         private void Issue_Click(object sender, RoutedEventArgs e)

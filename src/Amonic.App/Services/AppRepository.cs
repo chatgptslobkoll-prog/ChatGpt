@@ -256,8 +256,10 @@ WHERE (@FromID IS NULL OR r.DepartureAirportID = @FromID)
             switch (sortBy)
             {
                 case "Economy Price":
+                case "Цена эконом":
                     return list.OrderBy(x => x.Economy).ToList();
                 case "Confirmed":
+                case "Подтвержден":
                     return list.OrderByDescending(x => x.Confirmed).ThenBy(x => x.Date).ThenBy(x => x.Time).ToList();
                 default:
                     return list.OrderBy(x => x.Date).ThenBy(x => x.Time).ToList();
@@ -467,7 +469,7 @@ VALUES (@UserID,@ScheduleID,@CabinTypeID,@Firstname,@Lastname,@Email,@Phone,@Pas
                         {
                             Passenger = p.FirstName + " " + p.LastName,
                             Flight = flightNo,
-                            Cabin = cabinTypeId == 1 ? "Economy" : cabinTypeId == 2 ? "Business" : "First",
+                            Cabin = cabinTypeId == 1 ? "Эконом" : cabinTypeId == 2 ? "Бизнес" : "Первый",
                             Price = price
                         });
                     }

@@ -19,7 +19,7 @@ namespace Amonic.App.Views
 
         private void LoadAirports()
         {
-            var airports = new List<AirportItem> { new AirportItem { ID = 0, IATACode = "ALL" } };
+            var airports = new List<AirportItem> { new AirportItem { ID = 0, IATACode = "ВСЕ" } };
             airports.AddRange(_repository.GetAirports());
             FromComboBox.ItemsSource = airports;
             ToComboBox.ItemsSource = new List<AirportItem>(airports);
@@ -33,7 +33,7 @@ namespace Amonic.App.Views
             var fromId = (FromComboBox.SelectedValue is int f && f != 0) ? (int?)f : null;
             var toId = (ToComboBox.SelectedValue is int t && t != 0) ? (int?)t : null;
             var date = DatePicker.SelectedDate;
-            var sort = (SortComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "Date and Time";
+            var sort = (SortComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "Дата и время";
             SchedulesDataGrid.ItemsSource = _repository.SearchSchedules(fromId, toId, date, FlightNoTextBox.Text.Trim(), sort);
         }
 

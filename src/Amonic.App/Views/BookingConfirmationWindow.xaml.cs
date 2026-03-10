@@ -67,7 +67,7 @@ namespace Amonic.App.Views
         {
             PassengersDataGrid.ItemsSource = null;
             PassengersDataGrid.ItemsSource = _passengers;
-            Title = $"Booking Confirmation ({_passengers.Count}/{_passengerCount})";
+            Title = $"Подтверждение бронирования ({_passengers.Count}/{_passengerCount})";
         }
 
         private void RemovePassenger_Click(object sender, RoutedEventArgs e)

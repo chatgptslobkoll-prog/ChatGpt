@@ -20,9 +20,9 @@ namespace Amonic.App.Views
         private void LoadData()
         {
             var data = _repository.GetUserDashboard(_userId);
-            WelcomeTextBlock.Text = $"Hi {data.fullName}, Welcome to AMONIC Airlines Automation System";
-            TimeTextBlock.Text = $"Time spent on system: {data.timeSpent}";
-            CrashTextBlock.Text = $"Number of crashes: {data.crashes}";
+            WelcomeTextBlock.Text = $"Здравствуйте, {data.fullName}. Добро пожаловать в систему автоматизации AMONIC Airlines";
+            TimeTextBlock.Text = $"Время в системе: {data.timeSpent}";
+            CrashTextBlock.Text = $"Количество сбоев: {data.crashes}";
             ActivityDataGrid.ItemsSource = data.logs;
         }
 

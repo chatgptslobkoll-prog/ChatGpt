@@ -15,7 +15,7 @@ namespace Amonic.App.Views
             InitializeComponent();
             _userId = userId;
             CurrentRoleTextBlock.Text = currentRole;
-            RoleComboBox.SelectedIndex = currentRole == "Administrator" ? 0 : 1;
+            RoleComboBox.SelectedIndex = (currentRole ?? string.Empty).Contains("Admin") || (currentRole ?? string.Empty).Contains("Админ") ? 0 : 1;
         }
 
         private void Apply_Click(object sender, RoutedEventArgs e)

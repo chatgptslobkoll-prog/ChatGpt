@@ -15,7 +15,7 @@ namespace Amonic.App.Views
 
         private void Browse_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new OpenFileDialog { Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*" };
+            var dialog = new OpenFileDialog { Filter = "CSV файлы (*.csv)|*.csv|Все файлы (*.*)|*.*" };
             if (dialog.ShowDialog() == true)
             {
                 PathTextBox.Text = dialog.FileName;

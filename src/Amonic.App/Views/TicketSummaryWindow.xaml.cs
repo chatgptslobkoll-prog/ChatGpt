@@ -8,7 +8,7 @@ namespace Amonic.App.Views
         public TicketSummaryWindow(IssueResult issueResult)
         {
             InitializeComponent();
-            BookingReferenceTextBlock.Text = "Booking reference: " + issueResult.BookingReference;
+            BookingReferenceTextBlock.Text = "Код бронирования: " + issueResult.BookingReference;
             TicketsDataGrid.ItemsSource = issueResult.Tickets;
         }
 
