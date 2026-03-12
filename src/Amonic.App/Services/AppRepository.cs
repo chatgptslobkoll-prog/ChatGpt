@@ -104,6 +104,29 @@ SELECT @NewID;";
             }
         }
 
+
+        public int? GetOpenActivityLogId(int userId)
+        {
+            using (var cn = Db.OpenConnection())
+            using (var cmd = new SqlCommand("SELECT TOP 1 ID FROM UserActivityLogs WHERE UserID=@UserID AND LogoutAt IS NULL ORDER BY LoginAt DESC", cn))
+            {
+                cmd.Parameters.AddWithValue("@UserID", userId);
+                var obj = cmd.ExecuteScalar();
+                return obj == null ? (int?)null : Convert.ToInt32(obj);
+            }
+        }
+
+        public void SetCrashReason(int logId, string reason)
+        {
+            using (var cn = Db.OpenConnection())
+            using (var cmd = new SqlCommand("UPDATE UserActivityLogs SET CrashReason=@Reason, LogoutAt=ISNULL(LogoutAt,SYSDATETIME()) WHERE ID=@ID", cn))
+            {
+                cmd.Parameters.AddWithValue("@ID", logId);
+                cmd.Parameters.AddWithValue("@Reason", reason);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         public int CreateActivityLog(int userId)
         {
             using (var cn = Db.OpenConnection())

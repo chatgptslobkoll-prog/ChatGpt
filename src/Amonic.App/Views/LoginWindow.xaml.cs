@@ -56,6 +56,20 @@ namespace Amonic.App.Views
 
             _failedAttempts = 0;
 
+            var openLogId = _repository.GetOpenActivityLogId(result.UserId);
+            if (openLogId.HasValue)
+            {
+                var crashDialog = new CrashReasonWindow { Owner = this };
+                var crashDialogResult = crashDialog.ShowDialog();
+                if (crashDialogResult != true)
+                {
+                    MessageTextBlock.Text = "Для входа необходимо указать причину предыдущего сбоя.";
+                    return;
+                }
+
+                _repository.SetCrashReason(openLogId.Value, crashDialog.CrashReason);
+            }
+
             SessionContext.CurrentUserId = result.UserId;
             SessionContext.CurrentRoleId = result.RoleId;
 
