@@ -420,12 +420,17 @@ WHERE s.FlightNumber=@FlightNo AND s.[Date]=@Date";
             using (var cmd = cn.CreateCommand())
             {
                 cmd.CommandText = @"SELECT s.ID, s.[Date], s.[Time], da.IATACode AS [FromCode], aa.IATACode AS [ToCode], s.FlightNumber,
-s.EconomyPrice, a.TotalSeats, a.EconomySeats, a.BusinessSeats
+s.EconomyPrice, a.TotalSeats, a.EconomySeats, a.BusinessSeats, ISNULL(t.SoldSeats, 0) AS SoldSeats
 FROM Schedules s
 JOIN Routes r ON r.ID=s.RouteID
 JOIN Airports da ON da.ID=r.DepartureAirportID
 JOIN Airports aa ON aa.ID=r.ArrivalAirportID
 JOIN Aircrafts a ON a.ID=s.AircraftID
+LEFT JOIN (
+    SELECT ScheduleID, CabinTypeID, COUNT(1) AS SoldSeats
+    FROM Tickets
+    GROUP BY ScheduleID, CabinTypeID
+) t ON t.ScheduleID = s.ID AND t.CabinTypeID = @CabinTypeID
 WHERE r.DepartureAirportID=@FromID AND r.ArrivalAirportID=@ToID AND s.Confirmed=1
 AND s.[Date] BETWEEN @StartDate AND @EndDate
 ORDER BY s.[Date], s.[Time]";
@@ -433,6 +438,7 @@ ORDER BY s.[Date], s.[Time]";
                 cmd.Parameters.AddWithValue("@ToID", toId);
                 cmd.Parameters.AddWithValue("@StartDate", start);
                 cmd.Parameters.AddWithValue("@EndDate", end);
+                cmd.Parameters.AddWithValue("@CabinTypeID", cabinTypeId);
 
                 using (var rd = cmd.ExecuteReader())
                 {
@@ -441,6 +447,16 @@ ORDER BY s.[Date], s.[Time]";
                         var scheduleId = (int)rd["ID"];
                         var eco = Convert.ToDecimal(rd["EconomyPrice"]);
                         var price = ComputeCabinPrice(eco, cabinTypeId);
+                        var totalSeats = (int)rd["TotalSeats"];
+                        var economySeats = (int)rd["EconomySeats"];
+                        var businessSeats = (int)rd["BusinessSeats"];
+                        var soldSeats = Convert.ToInt32(rd["SoldSeats"]);
+                        var capacity = cabinTypeId == 1
+                            ? economySeats
+                            : cabinTypeId == 2
+                                ? businessSeats
+                                : Math.Max(totalSeats - economySeats - businessSeats, 0);
+
                         list.Add(new FlightOptionItem
                         {
                             ScheduleID = scheduleId,
@@ -450,7 +466,7 @@ ORDER BY s.[Date], s.[Time]";
                             Time = (TimeSpan)rd["Time"],
                             Flights = rd["FlightNumber"].ToString(),
                             Price = price,
-                            FreeSeats = GetFreeSeats(cn, scheduleId, cabinTypeId, (int)rd["TotalSeats"], (int)rd["EconomySeats"], (int)rd["BusinessSeats"])
+                            FreeSeats = Math.Max(capacity - soldSeats, 0)
                         });
                     }
                 }
@@ -546,18 +562,6 @@ WHERE da.IATACode=@From AND aa.IATACode=@To", cn))
                 return (decimal)Math.Floor((decimal)business * 1.30m);
             }
             return economy;
-        }
-
-        private int GetFreeSeats(SqlConnection cn, int scheduleId, int cabinTypeId, int total, int economy, int business)
-        {
-            var cap = cabinTypeId == 1 ? economy : cabinTypeId == 2 ? business : Math.Max(total - economy - business, 0);
-            using (var cmd = new SqlCommand("SELECT COUNT(1) FROM Tickets WHERE ScheduleID=@ScheduleID AND CabinTypeID=@CabinTypeID", cn))
-            {
-                cmd.Parameters.AddWithValue("@ScheduleID", scheduleId);
-                cmd.Parameters.AddWithValue("@CabinTypeID", cabinTypeId);
-                var sold = Convert.ToInt32(cmd.ExecuteScalar());
-                return Math.Max(cap - sold, 0);
-            }
         }
 
         private string GetFlightNo(SqlConnection cn, int scheduleId)
