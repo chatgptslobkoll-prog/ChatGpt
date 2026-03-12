@@ -1,0 +1,39 @@
+<Window x:Class="Amonic.App.Views.ManageSchedulesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Управление расписанием рейсов"
+        WindowStartupLocation="CenterScreen"
+        Height="580" Width="1080">
+    <DockPanel Margin="12">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+            <Button Width="150" Margin="0,0,8,0" Content="Поиск" Click="Search_Click"/>
+            <Button Width="150" Margin="0,0,8,0" Content="Импорт изменений" Click="Import_Click"/>
+            <Button Width="150" Margin="0,0,8,0" Content="Редактировать выбранный" Click="Edit_Click"/>
+            <Button Width="150" Content="Подтвердить/Отменить" Click="Toggle_Click"/>
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+            <TextBlock VerticalAlignment="Center" Text="Откуда:" Margin="0,0,6,0"/><ComboBox x:Name="FromComboBox" Width="120" Margin="0,0,8,0" DisplayMemberPath="IATACode" SelectedValuePath="ID"/>
+            <TextBlock VerticalAlignment="Center" Text="Куда:" Margin="0,0,6,0"/><ComboBox x:Name="ToComboBox" Width="120" Margin="0,0,8,0" DisplayMemberPath="IATACode" SelectedValuePath="ID"/>
+            <TextBlock VerticalAlignment="Center" Text="Дата:" Margin="0,0,6,0"/><DatePicker x:Name="DatePicker" Width="140" Margin="0,0,8,0"/>
+            <TextBlock VerticalAlignment="Center" Text="Рейс №:" Margin="0,0,6,0"/><TextBox x:Name="FlightNoTextBox" Width="100" Margin="0,0,8,0"/>
+            <TextBlock VerticalAlignment="Center" Text="Сортировка:" Margin="0,0,6,0"/>
+            <ComboBox x:Name="SortComboBox" Width="150"><ComboBoxItem Content="Дата и время" IsSelected="True"/><ComboBoxItem Content="Цена эконом"/><ComboBoxItem Content="Подтвержден"/></ComboBox>
+        </StackPanel>
+
+        <DataGrid x:Name="SchedulesDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата" Width="100" Binding="{Binding Date}"/>
+                <DataGridTextColumn Header="Время" Width="90" Binding="{Binding Time}"/>
+                <DataGridTextColumn Header="Откуда" Width="80" Binding="{Binding From}"/>
+                <DataGridTextColumn Header="Куда" Width="80" Binding="{Binding To}"/>
+                <DataGridTextColumn Header="Рейс №" Width="100" Binding="{Binding FlightNumber}"/>
+                <DataGridTextColumn Header="Самолет" Width="130" Binding="{Binding Aircraft}"/>
+                <DataGridTextColumn Header="Эконом" Width="100" Binding="{Binding Economy}"/>
+                <DataGridTextColumn Header="Бизнес" Width="100" Binding="{Binding Business}"/>
+                <DataGridTextColumn Header="Первый" Width="100" Binding="{Binding First}"/>
+                <DataGridCheckBoxColumn Header="Подтвержден" Width="90" Binding="{Binding Confirmed}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</Window>

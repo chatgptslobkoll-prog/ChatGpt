@@ -1,0 +1,46 @@
+<Window x:Class="Amonic.App.Views.AddUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Добавить пользователя"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Height="430" Width="520">
+    <Grid Margin="14">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.ColumnSpan="2" Text="Создание пользователя" FontSize="18" FontWeight="Bold" Margin="0,0,0,12"/>
+
+        <TextBlock Grid.Row="1" Text="Роль:" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,4" IsReadOnly="True" Text="Пользователь"/>
+
+        <TextBlock Grid.Row="2" Text="Email:" VerticalAlignment="Center"/>
+        <TextBox x:Name="EmailTextBox" Grid.Row="2" Grid.Column="1" Margin="0,4"/>
+
+        <TextBlock Grid.Row="3" Text="Пароль:" VerticalAlignment="Center"/>
+        <PasswordBox x:Name="PasswordBox" Grid.Row="3" Grid.Column="1" Margin="0,4"/>
+
+        <TextBlock Grid.Row="4" Text="Имя:" VerticalAlignment="Center"/>
+        <TextBox x:Name="FirstNameTextBox" Grid.Row="4" Grid.Column="1" Margin="0,4"/>
+
+        <TextBlock Grid.Row="5" Text="Фамилия:" VerticalAlignment="Center"/>
+        <TextBox x:Name="LastNameTextBox" Grid.Row="5" Grid.Column="1" Margin="0,4"/>
+
+        <TextBlock Grid.Row="6" Text="Офис:" VerticalAlignment="Center"/>
+        <ComboBox x:Name="OfficeComboBox" Grid.Row="6" Grid.Column="1" Margin="0,4" DisplayMemberPath="Title" SelectedValuePath="ID"/>
+
+        <TextBlock Grid.Row="7" Text="Дата рождения:" VerticalAlignment="Center"/>
+        <DatePicker x:Name="BirthdatePicker" Grid.Row="7" Grid.Column="1" Margin="0,4"/>
+
+        <TextBlock x:Name="ErrorTextBlock" Grid.Row="8" Grid.ColumnSpan="2" Foreground="Firebrick" Margin="0,6"/>
+
+        <StackPanel Grid.Row="9" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button Width="120" Margin="0,0,8,0" Content="Сохранить" Click="Save_Click"/>
+            <Button Width="120" Background="IndianRed" Foreground="White" Content="Отмена" Click="Cancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
